@@ -14,6 +14,9 @@ public class ButtonController : MonoBehaviour
     public Transform layout;
     public int btnCount = 48;
 
+    public AudioClip ClickSound;
+    public AudioClip SucessSound;
+
     private int firstButtonNum = 0;
     private Button firstButton = null;
 
@@ -65,6 +68,7 @@ public class ButtonController : MonoBehaviour
 
     public void OnButtonClick(Button clickedButton, int buttonNum) //클릭한 버튼과 버튼 숫자를 가져옴
     {
+        GetComponent<AudioSource>().PlayOneShot(ClickSound);
         int score = UIController.instance.Score;
 
         grid.enabled = false; 
@@ -81,6 +85,7 @@ public class ButtonController : MonoBehaviour
                 Destroy(firstButton.gameObject);
                 Destroy(clickedButton.gameObject);
                 UIController.instance.IncreaseScore(); // UIController의 점수 증가 메서드 호출
+                GetComponent<AudioSource>().PlayOneShot(SucessSound);
             }
             else //잘못누르면 리셋되게 해줌
             {
