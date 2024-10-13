@@ -65,12 +65,12 @@ public class ButtonController : MonoBehaviour
         }
     }
 
-    public void OnButtonClick(Button clickedButton, int buttonNum) //클릭한 버튼과 버튼 숫자를 가져옴
+    public void OnButtonClick(Button clickedButton, int buttonNum)
     {
         GetComponent<AudioSource>().PlayOneShot(ClickSound);
         int score = UIController.Instance.Score;
 
-        grid.enabled = false; 
+        grid.enabled = false;
 
         if (firstButton == null)
         {
@@ -79,32 +79,46 @@ public class ButtonController : MonoBehaviour
         }
         else
         {
-            if(firstButtonNum == buttonNum && clickedButton!= firstButton)
+            if (firstButtonNum == buttonNum && clickedButton != firstButton)
             {
                 Destroy(firstButton.gameObject);
                 Destroy(clickedButton.gameObject);
                 UIController.Instance.IncreaseScore(); // UIController의 점수 증가 메서드 호출
                 GetComponent<AudioSource>().PlayOneShot(SucessSound);
+
+                // 게임 클리어 체크 호출
+                GameClearCheck();
             }
-            else //잘못누르면 리셋되게 해줌
+            else // 잘못 누르면 리셋되게 해줌
             {
                 firstButton = clickedButton;
                 firstButtonNum = buttonNum;
             }
         }
-
     }
 
     void GameClearCheck()
     {
         Button[] remainButtons = layout.GetComponentsInChildren<Button>();
-        if(remainButtons.Length == 0)
+        if (remainButtons.Length == 0)
         {
-            UIController.Instance.isCleared = true;
+            UIController.Instance.isCleared = true; // 게임 클리어 상태 설정
 
+            // 현재 점수를 PlayerPrefs에 저장
+            PlayerPrefs.SetInt("Score", UIController.Instance.Score);
+
+            // GameManager의 SaveHighScore 메소드 호출
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.SaveHighScore(UIController.Instance.Score, UIController.Instance.timerText.text); // 현재 점수와 시간을 넘김
+            }
+
+            // GameEndScene으로 전환
             SceneManager.LoadScene("GameEndScene");
         }
     }
+
 
     void Update()
     {

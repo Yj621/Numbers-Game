@@ -266,7 +266,6 @@ GameObject:
   m_Component:
   - component: {fileID: 178854215}
   - component: {fileID: 178854217}
-  - component: {fileID: 178854218}
   - component: {fileID: 178854216}
   m_Layer: 5
   m_Name: Rank_Panel
@@ -334,20 +333,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 178854214}
   m_CullTransparentMesh: 1
---- !u!114 &178854218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 178854214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30c7f3becefba4f48b0056ddd54956ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rankingPanel: {fileID: 178854214}
-  rankText: {fileID: 1240937145}
 --- !u!1 &198237639
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +607,7 @@ MonoBehaviour:
   scoreText: {fileID: 1268342379}
   titleText: {fileID: 708542697}
   timeText: {fileID: 1898204465}
+  rankText: {fileID: 1240937145}
 --- !u!4 &606325504
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,6 +1118,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 606325503}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: DisplayRanking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1049922006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,7 +1474,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: '1. 0 / 00:00
+
+    2. 0 / 00:00
+
+    3. 0 / 00:00
+
+    4. 0 / 00:00
+
+    5.
+    0 / 00:00
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1511,11 +1520,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 150
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

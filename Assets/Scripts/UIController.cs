@@ -39,18 +39,26 @@ public class UIController : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        
+
         TextUpdate();
 
-        if(timer <= 0)
+        if (timer <= 0)
         {
-            PlayerPrefs.SetInt("Score", score); //키 벨류 저장장소
+            // 현재 점수를 PlayerPrefs에 저장
+            PlayerPrefs.SetInt("Score", score); // 키 벨류 저장장소
 
-            SceneManager.LoadScene("GameEndScene");
+            // GameManager의 SaveHighScore 메소드 호출
+            GameManager gameManager = FindObjectOfType<GameManager>();
+            if (gameManager != null)
+            {
+                gameManager.SaveHighScore(score, timerText.text); // 현재 점수와 시간을 넘김
+            }
+
             isCleared = false;
+            SceneManager.LoadScene("GameEndScene");
         }
-        
     }
+
     public void TextUpdate()
     {
         // 타이머를 분:초 (MM:SS) 형식으로 변환
