@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
@@ -19,7 +19,6 @@ public class ButtonController : MonoBehaviour
 
     private int firstButtonNum = 0;
     private Button firstButton = null;
-
 
     void Start()
     {
@@ -69,7 +68,7 @@ public class ButtonController : MonoBehaviour
     public void OnButtonClick(Button clickedButton, int buttonNum) //클릭한 버튼과 버튼 숫자를 가져옴
     {
         GetComponent<AudioSource>().PlayOneShot(ClickSound);
-        int score = UIController.instance.Score;
+        int score = UIController.Instance.Score;
 
         grid.enabled = false; 
 
@@ -84,7 +83,7 @@ public class ButtonController : MonoBehaviour
             {
                 Destroy(firstButton.gameObject);
                 Destroy(clickedButton.gameObject);
-                UIController.instance.IncreaseScore(); // UIController의 점수 증가 메서드 호출
+                UIController.Instance.IncreaseScore(); // UIController의 점수 증가 메서드 호출
                 GetComponent<AudioSource>().PlayOneShot(SucessSound);
             }
             else //잘못누르면 리셋되게 해줌
@@ -96,7 +95,20 @@ public class ButtonController : MonoBehaviour
 
     }
 
+    void GameClearCheck()
+    {
+        Button[] remainButtons = layout.GetComponentsInChildren<Button>();
+        if(remainButtons.Length == 0)
+        {
+            UIController.Instance.isCleared = true;
+
+            SceneManager.LoadScene("GameEndScene");
+        }
+    }
+
     void Update()
     {
+        // 모든 버튼이 사라졌는지 체크
+        GameClearCheck();
     }
 }

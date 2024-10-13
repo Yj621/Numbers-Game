@@ -362,7 +362,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 33f7a2371f0657041a016594bbba5690, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1081,6 +1081,7 @@ MonoBehaviour:
   scoreText: {fileID: 135742828}
   timerText: {fileID: 1088543996}
   timer: 60
+  isCleared: 0
 --- !u!82 &9091192464247496786
 AudioSource:
   m_ObjectHideFlags: 0

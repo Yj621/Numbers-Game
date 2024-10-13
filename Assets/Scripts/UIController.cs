@@ -4,21 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
-    public static UIController instance;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timerText;
 
     public float timer = 60f;
+    public bool isCleared = false;
 
     private int score;
     public int Score
     {
-        get
-        {
-            return score;
-        }
+        get {return score;}
     }
-
+    private static UIController instance;
+    public static UIController Instance
+    {
+        get { return instance; }
+    }
+    void Awake()
+    {
+        instance = this;
+    }
+    
     void Start()
     {
         instance = this;
@@ -40,8 +46,10 @@ public class UIController : MonoBehaviour
         {
             PlayerPrefs.SetInt("Score", score); //키 벨류 저장장소
 
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameEndScene");
+            isCleared = false;
         }
+        
     }
     public void TextUpdate()
     {
