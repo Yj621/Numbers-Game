@@ -106,12 +106,13 @@ public class ButtonController : MonoBehaviour
 
             // 현재 점수를 PlayerPrefs에 저장
             PlayerPrefs.SetInt("Score", UIController.Instance.Score);
-
+            Debug.Log("TEST");
             // GameManager의 SaveHighScore 메소드 호출
             GameManager gameManager = FindObjectOfType<GameManager>();
             if (gameManager != null)
             {
                 gameManager.SaveHighScore(UIController.Instance.Score, UIController.Instance.timerText.text); // 현재 점수와 시간을 넘김
+                
             }
 
             // GameEndScene으로 전환
